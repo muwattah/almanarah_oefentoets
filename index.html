@@ -13,6 +13,7 @@
       --muted: #8ba3a3;
       --correct: #2e7d4f;
       --wrong: #9b2c2c;
+      --partial: #b8860b;
       --border: #2a4a4a;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -82,15 +83,16 @@
     .option.correct { border-color: var(--correct); background: rgba(46,125,79,0.15); }
     .option.wrong { border-color: var(--wrong); background: rgba(155,44,44,0.15); }
     .option input { margin-top: 0.2rem; accent-color: var(--accent); }
-    .option-letter {
-      font-weight: 700; color: var(--accent); min-width: 1.4rem;
-    }
+    .option-letter { font-weight: 700; color: var(--accent); min-width: 1.4rem; }
     .open-answer {
       width: 100%; min-height: 100px; padding: 0.85rem 1rem; border-radius: 10px;
       border: 1px solid var(--border); background: rgba(0,0,0,0.25); color: var(--text);
       font-family: inherit; font-size: 0.95rem; resize: vertical;
     }
     .open-answer:focus { outline: none; border-color: var(--accent); }
+    .open-answer.feedback-good { border-color: var(--correct); }
+    .open-answer.feedback-partial { border-color: var(--partial); }
+    .open-answer.feedback-poor { border-color: var(--wrong); }
     .btn-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.25rem; }
     button {
       font-family: inherit; font-size: 0.95rem; font-weight: 600; padding: 0.65rem 1.3rem;
@@ -102,6 +104,7 @@
     .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
     .btn-show { background: transparent; color: var(--muted); border: 1px solid var(--border); font-size: 0.85rem; padding: 0.4rem 0.9rem; }
+    .btn-check-open { background: transparent; color: var(--accent); border: 1px solid var(--accent); font-size: 0.85rem; padding: 0.4rem 0.9rem; }
     .model-answer {
       display: none; margin-top: 1rem; padding: 1rem; background: rgba(46,125,79,0.12);
       border: 1px solid var(--correct); border-radius: 10px; font-size: 0.95rem;
@@ -109,6 +112,13 @@
     .model-answer.visible { display: block; }
     .model-answer strong { color: var(--accent); }
     .grading { color: var(--muted); font-size: 0.85rem; margin-top: 0.5rem; }
+    .open-feedback {
+      display: none; margin-top: 0.75rem; padding: 0.75rem 1rem; border-radius: 10px; font-size: 0.9rem;
+    }
+    .open-feedback.visible { display: block; }
+    .open-feedback.good { background: rgba(46,125,79,0.15); border: 1px solid var(--correct); }
+    .open-feedback.partial { background: rgba(184,134,11,0.15); border: 1px solid var(--partial); }
+    .open-feedback.poor { background: rgba(155,44,44,0.15); border: 1px solid var(--wrong); }
     .nav {
       display: flex; justify-content: space-between; align-items: center; margin-top: 2rem;
       padding-top: 1.5rem; border-top: 1px solid var(--border); gap: 1rem; flex-wrap: wrap;
@@ -130,6 +140,9 @@
     footer {
       text-align: center; padding: 2rem 1rem; color: var(--muted); font-size: 0.85rem;
       border-top: 1px solid var(--border); margin-top: 3rem;
+    }
+    .hint {
+      font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem;
     }
     @media (max-width: 600px) {
       header h1 { font-size: 1.4rem; }
@@ -200,6 +213,85 @@
     let quizData = null;
     let answers = {};
 
+    // Stopwoorden die we negeren bij vergelijking
+    const STOP = new Set([
+      'de','het','een','van','en','in','op','te','dat','die','is','zijn','voor','met',
+      'aan','als','om','bij','uit','naar','ook','nog','niet','geen','wel','dit','deze',
+      'worden','wordt','werd','waren','heeft','hebben','had','kan','kunnen','moet','zou',
+      'of','maar','door','over','tot','er','ze','hij','zij','we','wij','je','jij','u',
+      'haar','hem','hun','ons','mijn','jouw','uw','zo','meer','veel','alle','al','dan',
+      'wat','wie','waar','hoe','waarom','welke','welk','iets','niets','alles','iemand',
+      'the','a','an','of','to','and','in','is','it','for','on','with','as','by','at'
+    ]);
+
+    function normalize(text) {
+      if (!text) return '';
+      return text
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')          // strip accents
+        .replace(/[ʿʾʼ']/g, '')                   // Arabic hamza-achtige tekens
+        .replace(/[^\w\s\u0600-\u06FF]/g, ' ')   // behoud letters + Arabisch
+        .replace(/\s+/g, ' ')
+        .trim();
+    }
+
+    function getWords(text) {
+      return normalize(text)
+        .split(' ')
+        .filter(w => w.length > 2 && !STOP.has(w));
+    }
+
+    // Levenshtein distance (voor kleine spelfouten)
+    function levenshtein(a, b) {
+      if (a === b) return 0;
+      if (!a.length) return b.length;
+      if (!b.length) return a.length;
+      const m = a.length, n = b.length;
+      const dp = Array.from({ length: m + 1 }, () => new Array(n + 1).fill(0));
+      for (let i = 0; i <= m; i++) dp[i][0] = i;
+      for (let j = 0; j <= n; j++) dp[0][j] = j;
+      for (let i = 1; i <= m; i++) {
+        for (let j = 1; j <= n; j++) {
+          const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+          dp[i][j] = Math.min(
+            dp[i - 1][j] + 1,
+            dp[i][j - 1] + 1,
+            dp[i - 1][j - 1] + cost
+          );
+        }
+      }
+      return dp[m][n];
+    }
+
+    function wordsMatch(w1, w2) {
+      if (w1 === w2) return true;
+      // Korte woorden: exact of 1 verschil
+      const maxDist = w1.length <= 4 ? 1 : (w1.length <= 7 ? 2 : 3);
+      return levenshtein(w1, w2) <= maxDist;
+    }
+
+    function scoreOpenAnswer(userText, modelText) {
+      const userWords = getWords(userText);
+      const modelWords = [...new Set(getWords(modelText))]; // unieke modelwoorden
+
+      if (userWords.length === 0) return { score: 0, matched: 0, total: modelWords.length };
+
+      let matched = 0;
+      for (const mw of modelWords) {
+        if (userWords.some(uw => wordsMatch(uw, mw))) matched++;
+      }
+
+      const ratio = modelWords.length ? matched / modelWords.length : 0;
+      return { score: ratio, matched, total: modelWords.length };
+    }
+
+    function feedbackLabel(ratio) {
+      if (ratio >= 0.55) return { level: 'good', text: 'Goed genoeg – de kern lijkt aanwezig' };
+      if (ratio >= 0.30) return { level: 'partial', text: 'Gedeeltelijk – enkele belangrijke punten missen' };
+      return { level: 'poor', text: 'Onvolledig – kijk het modelantwoord na' };
+    }
+
     async function loadQuiz() {
       try {
         const res = await fetch('al_manarah_quiz_30_vragen.json');
@@ -252,11 +344,17 @@
           html += '</div>';
         } else {
           const val = answers[q.id] || '';
-          html += `<textarea class="open-answer" data-q="${q.id}" placeholder="Schrijf je antwoord hier...">${val}</textarea>`;
+          html += `
+            <textarea class="open-answer" data-q="${q.id}" placeholder="Schrijf je antwoord hier...">${val}</textarea>
+            <div class="hint">Kleine spelfouten en andere formuleringen worden toleranter beoordeeld.</div>
+            <div class="open-feedback" id="fb-${q.id}"></div>`;
         }
 
+        html += `<div class="btn-row">`;
+        if (q.type !== 'multiple_choice') {
+          html += `<button class="btn-check-open" data-check="${q.id}">Controleer antwoord</button>`;
+        }
         html += `
-          <div class="btn-row">
             <button class="btn-show" data-show="${q.id}">Toon modelantwoord</button>
           </div>
           <div class="model-answer" id="model-${q.id}">
@@ -268,7 +366,7 @@
         container.appendChild(card);
       });
 
-      // Events
+      // Events – meerkeuze
       document.querySelectorAll('.option').forEach(opt => {
         opt.addEventListener('click', () => {
           const qid = opt.dataset.q;
@@ -281,18 +379,61 @@
         });
       });
 
+      // Events – open tekst
       document.querySelectorAll('.open-answer').forEach(ta => {
         ta.addEventListener('input', () => {
           answers[ta.dataset.q] = ta.value;
           updateProgress();
+          // reset feedback styling bij typen
+          ta.classList.remove('feedback-good', 'feedback-partial', 'feedback-poor');
+          const fb = document.getElementById('fb-' + ta.dataset.q);
+          if (fb) { fb.className = 'open-feedback'; fb.textContent = ''; }
         });
       });
 
+      // Toon modelantwoord
       document.querySelectorAll('.btn-show').forEach(btn => {
         btn.addEventListener('click', () => {
           const el = document.getElementById('model-' + btn.dataset.show);
           el.classList.toggle('visible');
           btn.textContent = el.classList.contains('visible') ? 'Verberg modelantwoord' : 'Toon modelantwoord';
+        });
+      });
+
+      // Controleer open antwoord (tolerant)
+      document.querySelectorAll('.btn-check-open').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const qid = btn.dataset.check;
+          const q = quizData.questions.find(x => x.id == qid);
+          const userText = answers[qid] || '';
+          const ta = document.querySelector(`.open-answer[data-q="${qid}"]`);
+          const fb = document.getElementById('fb-' + qid);
+
+          if (!userText.trim()) {
+            fb.className = 'open-feedback visible poor';
+            fb.textContent = 'Nog geen antwoord ingevuld.';
+            ta.classList.add('feedback-poor');
+            return;
+          }
+
+          const result = scoreOpenAnswer(userText, q.model_answer);
+          const label = feedbackLabel(result.score);
+          const pct = Math.round(result.score * 100);
+
+          ta.classList.remove('feedback-good', 'feedback-partial', 'feedback-poor');
+          ta.classList.add('feedback-' + label.level);
+          fb.className = 'open-feedback visible ' + label.level;
+          fb.innerHTML = `<strong>${label.text}</strong><br>
+            Overeenkomst kernwoorden: ±${pct}% (${result.matched} van ${result.total} belangrijke woorden herkend).<br>
+            <span style="opacity:0.8">Dit is een indicatie – vergelijk altijd zelf met het modelantwoord.</span>`;
+
+          // Automatisch modelantwoord tonen bij partial/poor
+          if (label.level !== 'good') {
+            const modelEl = document.getElementById('model-' + qid);
+            modelEl.classList.add('visible');
+            const showBtn = document.querySelector(`.btn-show[data-show="${qid}"]`);
+            if (showBtn) showBtn.textContent = 'Verberg modelantwoord';
+          }
         });
       });
 
