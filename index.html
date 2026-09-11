@@ -128,7 +128,6 @@
     }
     .btn-secondary:hover:not(:disabled) { border-color: var(--accent); color: var(--accent); }
 
-    /* Start / Result screens */
     .screen { display: none; }
     .screen.visible { display: block; }
     .start-card, .result-card {
@@ -179,7 +178,6 @@
       <div class="subtitle">Al-Wājibāt al-Mutaḥattimāt</div>
     </header>
 
-    <!-- START -->
     <div class="screen visible" id="screen-start">
       <div class="start-card">
         <h2>Klaar om te oefenen?</h2>
@@ -194,7 +192,6 @@
       </div>
     </div>
 
-    <!-- QUIZ -->
     <div class="screen" id="screen-quiz">
       <div class="progress-wrap">
         <div class="progress-meta">
@@ -212,7 +209,6 @@
       </div>
     </div>
 
-    <!-- RESULT -->
     <div class="screen" id="screen-result">
       <div class="result-card">
         <h2>Klaar!</h2>
@@ -232,10 +228,10 @@
   <script>
     let quizData = null;
     let currentIndex = 0;
-    let answers = {};       // { id: userAnswer }
-    let validated = {};     // { id: true }
-    let scores = {};        // { id: points earned }
-    let state = 'answering'; // answering | validated
+    let answers = {};
+    let validated = {};
+    let scores = {};
+    let state = 'answering';
 
     const STOP = new Set([
       'de','het','een','van','en','in','op','te','dat','die','is','zijn','voor','met',
@@ -319,33 +315,32 @@
       const isValidated = !!validated[q.id];
       state = isValidated ? 'validated' : 'answering';
 
-      // Progress
-      const pct = ((currentIndex) / quizData.questions.length) * 100;
+      const pct = (currentIndex / quizData.questions.length) * 100;
       document.getElementById('progress-fill').style.width = pct + '%';
       document.getElementById('progress-label').textContent =
-        `Vraag ${currentIndex + 1} van ${quizData.questions.length}`;
-      document.getElementById('score-live').textContent = `Score: ${totalScore()}`;
+        'Vraag ' + (currentIndex + 1) + ' van ' + quizData.questions.length;
+      document.getElementById('score-live').textContent = 'Score: ' + totalScore();
 
-      let html = `
-        <div class="section-tag">Onderdeel ${q.section} · ${q.section_title}</div>
-        <div class="q-header">
-          <span class="q-num">Vraag ${q.id}</span>
-          <span class="q-points">${q.points} punten</span>
-        </div>
-        <div class="q-text">${q.question}</div>
-      `;
+      let html = ''
+        + '<div class="section-tag">Onderdeel ' + q.section + ' · ' + q.section_title + '</div>'
+        + '<div class="q-header">'
+        +   '<span class="q-num">Vraag ' + q.id + '</span>'
+        +   '<span class="q-points">' + q.points + ' punten</span>'
+        + '</div>'
+        + '<div class="q-text">' + q.question + '</div>';
 
       if (q.source) {
-        html += `
-          <div class="source">
-            <div class="ref">${q.source.reference}</div>
-            <div class="arabic">${q.source.arabic || ''}</div>
-          </div>`;
+        html += ''
+          + '<div class="source">'
+          +   '<div class="ref">' + q.source.reference + '</div>'
+          +   '<div class="arabic">' + (q.source.arabic || '') + '</div>'
+          + '</div>';
       }
 
       if (q.type === 'multiple_choice') {
         html += '<div class="options">';
-        for (const [letter, text] of Object.entries(q.options)) {
+        for (const letter of Object.keys(q.options)) {
+          const text = q.options[letter];
           let cls = 'option';
           if (answers[q.id] === letter) cls += ' selected';
           if (isValidated) {
@@ -353,121 +348,113 @@
             if (letter === q.correct_answer) cls += ' correct';
             else if (answers[q.id] === letter) cls += ' wrong';
           }
-          html += `
-            <label class="${cls}" data-ans="${letter}">
-              <input type="radio" name="q" value="${letter}"
-                ${answers[q.id] === letter ? 'checked' : ''}
-                ${isValidated ? 'disabled' : ''} />
-              <span class="option-letter">${letter}</span>
-              <span>${text}</span>
-            </label>`;
+          html += ''
+            + '<label class="' + cls + '" data-ans="' + letter + '">'
+            +   '<input type="radio" name="q" value="' + letter + '"'
+            +     (answers[q.id] === letter ? ' checked' : '')
+            +     (isValidated ? ' disabled' : '') + ' />'
+            +   '<span class="option-letter">' + letter + '</span>'
+            +   '<span>' + text + '</span>'
+            + '</label>';
         }
         html += '</div>';
       } else {
         const val = answers[q.id] || '';
-        html += `
-          <textarea class="open-answer" id="open-input"
-            placeholder="Schrijf je antwoord hier..."
-            ${isValidated ? 'disabled' : ''}>${val}</textarea>
-          <div class="hint">Kleine spelfouten en andere formuleringen worden toleranter beoordeeld.</div>`;
+        html += ''
+          + '<textarea class="open-answer" id="open-input"'
+          +   ' placeholder="Schrijf je antwoord hier..."'
+          +   (isValidated ? ' disabled' : '') + '>' + val + '</textarea>'
+          + '<div class="hint">Kleine spelfouten en andere formuleringen worden toleranter beoordeeld.</div>';
       }
 
-      // Feedback area
-      html += `<div class="feedback" id="feedback"></div>`;
-
+      html += '<div class="feedback" id="feedback"></div>';
       card.innerHTML = html;
 
-      // Show previous feedback if already validated
-      if (isValidated) {
-        showFeedback(q);
-      }
+      if (isValidated) showFeedback(q);
 
-      // Option clicks
       if (q.type === 'multiple_choice' && !isValidated) {
-        document.querySelectorAll('.option').forEach(opt => {
-          opt.addEventListener('click', () => {
+        document.querySelectorAll('.option').forEach(function(opt) {
+          opt.addEventListener('click', function() {
             answers[q.id] = opt.dataset.ans;
-            document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+            document.querySelectorAll('.option').forEach(function(o) { o.classList.remove('selected'); });
             opt.classList.add('selected');
             opt.querySelector('input').checked = true;
           });
         });
       }
 
-      // Open text save
-      const ta = document.getElementById('open-input');
+      var ta = document.getElementById('open-input');
       if (ta && !isValidated) {
-        ta.addEventListener('input', () => {
+        ta.addEventListener('input', function() {
           answers[q.id] = ta.value;
         });
       }
 
-      // Nav buttons
       document.getElementById('btn-prev').disabled = currentIndex === 0;
       updateActionButton();
     }
 
     function updateActionButton() {
-      const btn = document.getElementById('btn-action');
+      var btn = document.getElementById('btn-action');
       if (state === 'answering') {
         btn.textContent = 'Controleer';
-        btn.disabled = false;
       } else {
-        const isLast = currentIndex === quizData.questions.length - 1;
+        var isLast = currentIndex === quizData.questions.length - 1;
         btn.textContent = isLast ? 'Bekijk resultaat' : 'Volgende →';
-        btn.disabled = false;
       }
+      btn.disabled = false;
     }
 
     function showFeedback(q) {
-      const fb = document.getElementById('feedback');
-      let level, msg;
+      var fb = document.getElementById('feedback');
+      var level, msg;
 
       if (q.type === 'multiple_choice') {
-        const correct = answers[q.id] === q.correct_answer;
+        var correct = answers[q.id] === q.correct_answer;
         level = correct ? 'good' : 'poor';
-        msg = correct
-          ? `<strong>Correct!</strong> +${q.points} punten`<br>
-          : `<strong>Onjuist.</strong> Het juiste antwoord is <strong>${q.correct_answer}</strong>.`;
-        msg += `<div class="model"><strong>Uitleg:</strong> ${q.model_answer}</div>`;
+        if (correct) {
+          msg = '<strong>Correct!</strong> +' + q.points + ' punten';
+        } else {
+          msg = '<strong>Onjuist.</strong> Het juiste antwoord is <strong>' + q.correct_answer + '</strong>.';
+        }
+        msg += '<div class="model"><strong>Uitleg:</strong> ' + q.model_answer + '</div>';
       } else {
-        const ratio = scoreOpen(answers[q.id] || '', q.model_answer);
-        const pct = Math.round(ratio * 100);
+        var ratio = scoreOpen(answers[q.id] || '', q.model_answer);
+        var pct = Math.round(ratio * 100);
         if (ratio >= 0.55) {
           level = 'good';
-          msg = `<strong>Goed genoeg</strong> – de kern lijkt aanwezig (±${pct}%). +${scores[q.id] || 0} punten`;
+          msg = '<strong>Goed genoeg</strong> – de kern lijkt aanwezig (±' + pct + '%). +' + (scores[q.id] || 0) + ' punten';
         } else if (ratio >= 0.30) {
           level = 'partial';
-          msg = `<strong>Gedeeltelijk</strong> – enkele belangrijke punten missen (±${pct}%). +${scores[q.id] || 0} punten`;
+          msg = '<strong>Gedeeltelijk</strong> – enkele belangrijke punten missen (±' + pct + '%). +' + (scores[q.id] || 0) + ' punten';
         } else {
           level = 'poor';
-          msg = `<strong>Onvolledig</strong> (±${pct}%). +${scores[q.id] || 0} punten`;
+          msg = '<strong>Onvolledig</strong> (±' + pct + '%). +' + (scores[q.id] || 0) + ' punten';
         }
-        msg += `<div class="model"><strong>Modelantwoord:</strong><br>${q.model_answer}<br><span style="opacity:0.75">${q.grading || ''}</span></div>`;
+        msg += '<div class="model"><strong>Modelantwoord:</strong><br>' + q.model_answer +
+               '<br><span style="opacity:0.75">' + (q.grading || '') + '</span></div>';
       }
 
-      fb.className = `feedback visible ${level}`;
+      fb.className = 'feedback visible ' + level;
       fb.innerHTML = msg;
     }
 
     function validateCurrent() {
-      const q = quizData.questions[currentIndex];
+      var q = quizData.questions[currentIndex];
 
       if (q.type === 'multiple_choice') {
         if (!answers[q.id]) {
           alert('Kies eerst een antwoord.');
           return false;
         }
-        const correct = answers[q.id] === q.correct_answer;
-        scores[q.id] = correct ? q.points : 0;
+        scores[q.id] = (answers[q.id] === q.correct_answer) ? q.points : 0;
       } else {
-        const text = (answers[q.id] || '').trim();
+        var text = (answers[q.id] || '').trim();
         if (!text) {
           alert('Schrijf eerst een antwoord.');
           return false;
         }
-        const ratio = scoreOpen(text, q.model_answer);
-        // Punten proportioneel met tolerantie
+        var ratio = scoreOpen(text, q.model_answer);
         if (ratio >= 0.55) scores[q.id] = q.points;
         else if (ratio >= 0.30) scores[q.id] = Math.round(q.points * 0.5);
         else scores[q.id] = 0;
@@ -475,8 +462,8 @@
 
       validated[q.id] = true;
       state = 'validated';
-      renderQuestion(); // herteken met feedback + disabled inputs
-      document.getElementById('score-live').textContent = `Score: ${totalScore()}`;
+      renderQuestion();
+      document.getElementById('score-live').textContent = 'Score: ' + totalScore();
       return true;
     }
 
@@ -497,29 +484,29 @@
     }
 
     function showResult() {
-      const total = totalScore();
-      const max = quizData.total_points || 100;
+      var total = totalScore();
+      var max = quizData.total_points || 100;
       document.getElementById('final-score').textContent = total;
-      document.getElementById('final-detail').textContent = `van ${max} punten`;
+      document.getElementById('final-detail').textContent = 'van ' + max + ' punten';
 
-      // Breakdown per section
-      const sections = {};
-      quizData.questions.forEach(q => {
-        if (!sections[q.section]) sections[q.section] = { title: q.section_title, earned: 0, max: 0 };
+      var sections = {};
+      quizData.questions.forEach(function(q) {
+        if (!sections[q.section]) {
+          sections[q.section] = { title: q.section_title, earned: 0, max: 0 };
+        }
         sections[q.section].earned += scores[q.id] || 0;
         sections[q.section].max += q.points;
       });
 
-      let html = '';
-      for (const [key, s] of Object.entries(sections)) {
-        html += `<div><span>${key}. ${s.title}</span><span>${s.earned} / ${s.max}</span></div>`;
-      }
-      html += `<div style="font-weight:700;margin-top:0.4rem"><span>Totaal</span><span>${total} / ${max}</span></div>`;
+      var html = '';
+      Object.keys(sections).forEach(function(key) {
+        var s = sections[key];
+        html += '<div><span>' + key + '. ' + s.title + '</span><span>' + s.earned + ' / ' + s.max + '</span></div>';
+      });
+      html += '<div style="font-weight:700;margin-top:0.4rem"><span>Totaal</span><span>' + total + ' / ' + max + '</span></div>';
       document.getElementById('breakdown').innerHTML = html;
 
-      // Fill progress to 100%
       document.getElementById('progress-fill').style.width = '100%';
-
       showScreen('screen-result');
     }
 
@@ -533,13 +520,12 @@
       renderQuestion();
     }
 
-    // Events
-    document.getElementById('btn-start').addEventListener('click', () => {
+    document.getElementById('btn-start').addEventListener('click', function() {
       showScreen('screen-quiz');
       renderQuestion();
     });
 
-    document.getElementById('btn-action').addEventListener('click', () => {
+    document.getElementById('btn-action').addEventListener('click', function() {
       if (state === 'answering') {
         validateCurrent();
       } else {
