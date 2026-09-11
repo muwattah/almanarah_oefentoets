@@ -1,0 +1,435 @@
+{
+  "title": "Al-Manārah - Tussentijdse Oefentoets",
+  "subject": "Al-Wājibāt al-Mutaḥattimāt",
+  "topics": [
+    "De drie fundamenten",
+    "Aṣl ad-Dīn wa-Qāʿidatuhu",
+    "De voorwaarden van Lā ilāha illa Allāh en hun bewijzen"
+  ],
+  "question_count": 30,
+  "total_points": 100,
+  "duration_minutes": 90,
+  "sections": {
+    "A": {
+      "title": "Meerkeuze",
+      "questions": "1-10",
+      "points": 20
+    },
+    "B": {
+      "title": "Begrippen en korte uitleg",
+      "questions": "11-18",
+      "points": 24
+    },
+    "C": {
+      "title": "Bewijzen en bewijsvoering",
+      "questions": "19-24",
+      "points": 24
+    },
+    "D": {
+      "title": "Toepassingsvragen",
+      "questions": "25-28",
+      "points": 20
+    },
+    "E": {
+      "title": "Verbanden en inzicht",
+      "questions": "29-30",
+      "points": 12
+    }
+  },
+  "questions": [
+    {
+      "id": 1,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Welke opsomming geeft de drie fundamenten correct weer?",
+      "options": {
+        "A": "Kennis van Allāh, de engelen en de Boeken",
+        "B": "Kennis van de Heer, de religie en de Profeet",
+        "C": "Islām, īmān en iḥsān",
+        "D": "Rubūbiyyah, ulūhiyyah en al-asmāʾ waṣ-ṣifāt"
+      },
+      "correct_answer": "B",
+      "model_answer": "De drie fundamenten zijn kennis van de Heer, de religie en de Profeet.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 2,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Wat omvat de vraag ‘Wie is jouw Rabb?’ volgens de uitleg?",
+      "options": {
+        "A": "Alleen: wie heeft jou geschapen?",
+        "B": "Alleen: wie geeft jou voorziening?",
+        "C": "Wie is jouw Schepper, Onderhouder en Aanbedene?",
+        "D": "Welke profeet heeft jou de wetgeving gebracht?"
+      },
+      "correct_answer": "C",
+      "model_answer": "Rabb omvat hier de Schepper, Onderhouder en enige Aanbedene; niet slechts rubūbiyyah.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 3,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Welke formulering is de definitie van Islām uit de matn?",
+      "options": {
+        "A": "Kennis, zekerheid en waarachtigheid",
+        "B": "Overgave aan Allāh door Tawḥīd, gehoorzaamheid en vrijmaking van Shirk en haar mensen",
+        "C": "Liefde voor Allāh en goede omgang met iedereen",
+        "D": "Het uitspreken van de shahādah zonder verdere voorwaarden"
+      },
+      "correct_answer": "B",
+      "model_answer": "Dit is de vaste driedelige definitie uit de matn.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 4,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Wat betekent Islām in de algemene betekenis?",
+      "options": {
+        "A": "Alleen de Sharīʿah van Muḥammad",
+        "B": "De gemeenschappelijke religie van alle profeten: Tawḥīd en overgave aan Allāh",
+        "C": "Alleen de vijf uiterlijke pijlers",
+        "D": "Iedere vorm van religieuze overtuiging"
+      },
+      "correct_answer": "B",
+      "model_answer": "Alle profeten riepen in de algemene betekenis op tot dezelfde kern van Tawḥīd en overgave.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 5,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Wat is volgens de gebruikte uitleg het onderscheid tussen een nabī en een rasūl?",
+      "options": {
+        "A": "Een nabī krijgt geen openbaring",
+        "B": "Een rasūl hoeft niets over te brengen",
+        "C": "Een rasūl wordt gezonden naar een ongelovig, tegensprekend volk; een nabī onderwijst een gelovig volk",
+        "D": "Er is geen enkel verschil"
+      },
+      "correct_answer": "C",
+      "model_answer": "Iedere rasūl is een nabī, maar niet iedere nabī is een rasūl.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 6,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Welke twee zaken zijn de eigenlijke pijlers van Lā ilāha illa Allāh?",
+      "options": {
+        "A": "Kennis en liefde",
+        "B": "Nafī en ithbāt",
+        "C": "Oproep en geduld",
+        "D": "Angst en hoop"
+      },
+      "correct_answer": "B",
+      "model_answer": "Nafī verwerpt alle valse aanbidding; ithbāt bevestigt ʿibādah voor Allāh alleen.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 7,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Wat is de correcte betekenis van Lā ilāha illa Allāh?",
+      "options": {
+        "A": "Er bestaat niets behalve Allāh",
+        "B": "Er is geen Schepper behalve Allāh",
+        "C": "Niets of niemand heeft het recht aanbeden te worden behalve Allāh",
+        "D": "Iedere aanbidding leidt uiteindelijk tot Allāh"
+      },
+      "correct_answer": "C",
+      "model_answer": "De woorden ontkennen het recht op aanbidding voor alles naast Allāh.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 8,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Welke voorwaarde staat tegenover onwetendheid over de betekenis van de shahādah?",
+      "options": {
+        "A": "Al-qabūl",
+        "B": "Al-maḥabbah",
+        "C": "Al-ʿilm",
+        "D": "Aṣ-ṣidq"
+      },
+      "correct_answer": "C",
+      "model_answer": "Al-ʿilm betekent kennis van de betekenis.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 9,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Welke woorden vormen het directe bewijs voor zekerheid in Sūrah al-Ḥujurāt 49:15?",
+      "options": {
+        "A": "Zij geven zakāh",
+        "B": "Daarna twijfelen zij niet",
+        "C": "Zij spreken zacht",
+        "D": "Zij reizen over de aarde"
+      },
+      "correct_answer": "B",
+      "model_answer": "‘Thumma lam yartābū’ betekent dat zij daarna niet twijfelen.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 10,
+      "section": "A",
+      "section_title": "Meerkeuze",
+      "type": "multiple_choice",
+      "points": 2,
+      "question": "Wat is het tegengestelde van al-qabūl?",
+      "options": {
+        "A": "Onwetendheid",
+        "B": "Twijfel",
+        "C": "Leugenachtigheid",
+        "D": "Verwerping"
+      },
+      "correct_answer": "D",
+      "model_answer": "Al-qabūl is acceptatie; het tegengestelde is afwijzing of verwerping.",
+      "grading": "2 punten voor het juiste antwoord; 0 punten voor een fout of dubbel antwoord."
+    },
+    {
+      "id": 11,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Wat betekent het woord aṣl? Noem ook één reden waarom juist de drie fundamenten samen worden behandeld.",
+      "model_answer": "Aṣl is een fundament waarop iets anders wordt gebouwd en waaruit andere zaken voortkomen. De drie worden samen behandeld omdat de dienaar erover in het graf wordt ondervraagd, of omdat de hele religie om deze drie draait.",
+      "grading": "1 punt definitie; 2 punten voor één volledig uitgelegde reden."
+    },
+    {
+      "id": 12,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Geef de twee definities van ʿibādah: vanuit de aanbidder en vanuit datgene waarmee wordt aanbeden.",
+      "model_answer": "Vanuit de aanbidder: nederigheid en onderwerping aan Allāh door gehoorzaamheid. Vanuit datgene waarmee wordt aanbeden: een verzamelnaam voor alles aan innerlijke en uiterlijke woorden en daden waarvan Allāh houdt en waarmee Hij tevreden is.",
+      "grading": "1 punt per juiste definitie; 1 punt voor de elementen innerlijk/uiterlijk of woorden/daden."
+    },
+    {
+      "id": 13,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Schrijf de afstamming van de Profeet Muḥammad ṣallā Allāhu ʿalayhi wa-sallam op zoals deze in de matn wordt gevraagd, tot en met Ibrāhīm.",
+      "model_answer": "Muḥammad ibn ʿAbdillāh ibn ʿAbd al-Muṭṭalib ibn Hāshim. Hāshim behoort tot Quraysh, Quraysh tot de Arabieren en de Arabieren stammen af van Ismāʿīl ibn Ibrāhīm al-Khalīl.",
+      "grading": "1 punt tot Hāshim; 1 punt Quraysh en Arabieren; 1 punt Ismāʿīl ibn Ibrāhīm."
+    },
+    {
+      "id": 14,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Noem de eerste en tweede hoofdzaak van Aṣl ad-Dīn wa-Qāʿidatuhu in een kernachtige formulering.",
+      "model_answer": "Eerste hoofdzaak: Allāh alleen aanbidden zonder deelgenoot. Tweede hoofdzaak: waarschuwen tegen en vrijmaking van Shirk in de aanbidding van Allāh. Volledige antwoorden mogen ook de genoemde gevolgen noemen: aansporen, loyaliteit/vijandschap en het genoemde oordeel over wie Tawḥīd verlaat of Shirk verricht.",
+      "grading": "1 punt per kernzaak; 1 punt voor een correct genoemd gevolg of de koppeling aan ithbāt en nafī."
+    },
+    {
+      "id": 15,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Wat is een sharṭ (voorwaarde)? Leg uit waarom de aanwezigheid van één voorwaarde niet automatisch betekent dat het geheel aanwezig is.",
+      "model_answer": "Een sharṭ is iets waarvan de afwezigheid betekent dat het gevraagde niet tot stand komt. De aanwezigheid van één voorwaarde garandeert het geheel niet, omdat een andere noodzakelijke voorwaarde kan ontbreken.",
+      "grading": "2 punten definitie; 1 punt uitleg tweede zin."
+    },
+    {
+      "id": 16,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Leg het verschil uit tussen al-ʿilm en al-yaqīn.",
+      "model_answer": "Al-ʿilm is weten wat de shahādah betekent: ontkenning en bevestiging. Al-yaqīn is dat deze kennis zonder twijfel of onzekerheid in het hart vaststaat.",
+      "grading": "1 punt per begrip; 1 punt voor het duidelijke onderscheid."
+    },
+    {
+      "id": 17,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Leg het verschil uit tussen al-ikhlāṣ en aṣ-ṣidq.",
+      "model_answer": "Al-ikhlāṣ gaat over voor wie de aanbidding is: uitsluitend voor Allāh, zonder Shirk. Aṣ-ṣidq gaat over overeenstemming tussen hart en tong: de uitspraak is niet leugenachtig.",
+      "grading": "1 punt per begrip; 1 punt voor het juiste contrast."
+    },
+    {
+      "id": 18,
+      "section": "B",
+      "section_title": "Begrippen en korte uitleg",
+      "type": "open",
+      "points": 3,
+      "question": "Wat omvat de voorwaarde al-maḥabbah? Noem ook haar tegengestelde.",
+      "model_answer": "Liefde voor de shahādah, haar betekenis en wat zij vereist; liefde voor Allāh, Zijn Boodschapper, gehoorzaamheid en degenen van wie Allāh houdt. Het tegengestelde is afkeer/haat van de shahādah en haar betekenis.",
+      "grading": "2 punten voor de inhoud; 1 punt voor het tegengestelde."
+    },
+    {
+      "id": 19,
+      "section": "C",
+      "section_title": "Bewijzen en bewijsvoering",
+      "type": "evidence",
+      "points": 4,
+      "question": "Welke voorwaarde wordt bewezen met dit vers? Leg het verband uit.",
+      "source": {
+        "reference": "Sūrah Muḥammad 47:19",
+        "arabic": "فاعلم أنه لا إله إلا الله"
+      },
+      "model_answer": "Al-ʿilm. Het bevel ‘faʿlam’ - weet - koppelt de shahādah aan kennis van haar betekenis; alleen de klanken uitspreken is niet genoeg.",
+      "grading": "1 punt voorwaarde; 1 punt kernwoord; 2 punten uitleg."
+    },
+    {
+      "id": 20,
+      "section": "C",
+      "section_title": "Bewijzen en bewijsvoering",
+      "type": "evidence",
+      "points": 4,
+      "question": "Welke voorwaarde wordt bewezen met dit vers? Leg het verband uit.",
+      "source": {
+        "reference": "Sūrah al-Ḥujurāt 49:15",
+        "arabic": "إنما المؤمنون الذين آمنوا بالله ورسوله ثم لم يرتابوا"
+      },
+      "model_answer": "Al-yaqīn. De woorden ‘thumma lam yartābū’ betekenen dat de gelovigen daarna niet twijfelen. Het ontbreken van twijfel bewijst zekerheid.",
+      "grading": "1 punt voorwaarde; 1 punt juiste woorden; 2 punten uitleg."
+    },
+    {
+      "id": 21,
+      "section": "C",
+      "section_title": "Bewijzen en bewijsvoering",
+      "type": "evidence",
+      "points": 4,
+      "question": "Welke voorwaarde wordt bewezen met dit vers? Leg het verband uit.",
+      "source": {
+        "reference": "Sūrah al-Bayyinah 98:5",
+        "arabic": "وما أمروا إلا ليعبدوا الله مخلصين له الدين حنفاء"
+      },
+      "model_answer": "Al-ikhlāṣ. De aanbidding wordt begrensd door ‘mukhliṣīna lahu d-dīn’: de religie zuiver voor Allāh maken. Ḥunafāʾ duidt op afwenden van valsheid naar Tawḥīd.",
+      "grading": "1 punt voorwaarde; 1 punt tekstdeel; 2 punten uitleg."
+    },
+    {
+      "id": 22,
+      "section": "C",
+      "section_title": "Bewijzen en bewijsvoering",
+      "type": "evidence",
+      "points": 4,
+      "question": "Welke voorwaarde wordt bewezen met deze verzen? Leg het verband uit.",
+      "source": {
+        "reference": "Sūrah al-ʿAnkabūt 29:2-3",
+        "arabic": "أحسب الناس أن يتركوا أن يقولوا آمنا وهم لا يفتنون ... فليعلمن الله الذين صدقوا وليعلمن الكاذبين"
+      },
+      "model_answer": "Aṣ-ṣidq. Mensen worden niet met rust gelaten bij de uitspraak ‘wij geloven’; beproeving maakt de waarachtigen en leugenaars zichtbaar. Een mondelinge claim zonder innerlijke waarheid volstaat niet.",
+      "grading": "1 punt voorwaarde; 1 punt tegenstelling waarachtig/leugenaar; 2 punten uitleg."
+    },
+    {
+      "id": 23,
+      "section": "C",
+      "section_title": "Bewijzen en bewijsvoering",
+      "type": "evidence",
+      "points": 4,
+      "question": "Welke voorwaarde wordt bewezen met dit vers? Leg ook uit welke soort liefde hier wordt veroordeeld.",
+      "source": {
+        "reference": "Sūrah al-Baqarah 2:165",
+        "arabic": "ومن الناس من يتخذ من دون الله أندادا يحبونهم كحب الله والذين آمنوا أشد حبا لله"
+      },
+      "model_answer": "Al-maḥabbah. Het vers noemt de liefde van gelovigen voor Allāh en veroordeelt het nemen van rivalen die men liefheeft zoals Allāh. Veroordeeld is aanbiddende, vergoddelijkende liefde naast Allāh, niet natuurlijke liefde of liefde omwille van Allāh.",
+      "grading": "1 punt voorwaarde; 1 punt versverband; 2 punten juiste soort liefde."
+    },
+    {
+      "id": 24,
+      "section": "C",
+      "section_title": "Bewijzen en bewijsvoering",
+      "type": "evidence",
+      "points": 4,
+      "question": "Welke voorwaarde wordt bewezen met dit vers? Noem de drie stappen die in het volledige vers staan.",
+      "source": {
+        "reference": "Sūrah an-Nisāʾ 4:65",
+        "arabic": "فلا وربك لا يؤمنون حتى يحكموك ... ويسلموا تسليما"
+      },
+      "model_answer": "Al-inqiyād. De drie stappen zijn: (1) de Profeet als rechter aanvaarden in geschillen; (2) innerlijk geen weerstand voelen tegen zijn oordeel; (3) zich volledig overgeven. Dit bewijst uiterlijke en innerlijke onderwerping.",
+      "grading": "1 punt voorwaarde; 1 punt per stap."
+    },
+    {
+      "id": 25,
+      "section": "D",
+      "section_title": "Toepassingsvragen",
+      "type": "application",
+      "points": 5,
+      "question": "Een leerling zegt: ‘Ik geloof dat Allāh als enige schept en voorziet. Daarom heb ik de volledige betekenis van Lā ilāha illa Allāh verwezenlijkt.’ Beoordeel deze uitspraak met behulp van rubūbiyyah, ulūhiyyah en de juiste betekenis van de shahādah.",
+      "model_answer": "De uitspraak is onvolledig. Erkenning dat Allāh alleen schept en voorziet is rubūbiyyah. Lā ilāha illa Allāh gaat ook - en in het geschil met de mushrikūn vooral - over ulūhiyyah: niemand heeft recht op ʿibādah behalve Allāh. Nodig zijn nafī van iedere valse aanbidding en ithbāt van alle ʿibādah voor Allāh alleen.",
+      "grading": "1 punt beoordeling; 1 punt rubūbiyyah; 1 punt ulūhiyyah; 2 punten correcte betekenis met nafī/ithbāt."
+    },
+    {
+      "id": 26,
+      "section": "D",
+      "section_title": "Toepassingsvragen",
+      "type": "application",
+      "points": 5,
+      "question": "Iemand zegt met zijn tong dat hij gelooft, maar zijn hart ontkent wat hij uitspreekt. Welke voorwaarde ontbreekt? Geef ook een Qurʾānisch voorbeeld van een groep die zo wordt beschreven.",
+      "model_answer": "De ontbrekende voorwaarde is aṣ-ṣidq. Hart en tong stemmen niet overeen. Het Qurʾānische voorbeeld zijn de hypocrieten in al-Baqarah 2:8-10: zij zeggen te geloven terwijl zij geen gelovigen zijn en worden als leugenaars beschreven.",
+      "grading": "2 punten voorwaarde en uitleg; 2 punten voorbeeld; 1 punt verwijzing of correcte inhoud van het vers."
+    },
+    {
+      "id": 27,
+      "section": "D",
+      "section_title": "Toepassingsvragen",
+      "type": "application",
+      "points": 5,
+      "question": "Iemand weet wat de shahādah betekent, twijfelt er niet aan en erkent haar als waar. Toch weigert hij zich aan de bevelen van Allāh en de boodschap van de Profeet te onderwerpen. Welke voorwaarde ontbreekt vooral, en waarom?",
+      "model_answer": "Vooral al-inqiyād ontbreekt. Kennis, zekerheid en erkenning zijn niet hetzelfde als gehoorzaamheid. Inqiyād betekent innerlijke en uiterlijke onderwerping aan de rechten van de shahādah en aan wat Allāh via Zijn Boodschapper heeft voorgeschreven.",
+      "grading": "2 punten juiste voorwaarde; 2 punten uitleg; 1 punt innerlijk én uiterlijk/rechten van de shahādah."
+    },
+    {
+      "id": 28,
+      "section": "D",
+      "section_title": "Toepassingsvragen",
+      "type": "application",
+      "points": 5,
+      "question": "Een volk begrijpt de oproep tot Tawḥīd, maar wijst haar af omdat hun voorouders iets anders deden en omdat zij te hoogmoedig zijn om hun afgoden te verlaten. Welke voorwaarde ontbreekt? Noem een passend bewijs uit de behandelde stof.",
+      "model_answer": "Al-qabūl ontbreekt: zij verwerpen de oproep. Passende bewijzen zijn az-Zukhruf 43:23-25 over blinde navolging van voorouders, of aṣ-Ṣāffāt 37:35-36 over hoogmoed en het weigeren de afgoden te verlaten.",
+      "grading": "2 punten voorwaarde; 1 punt motivering; 2 punten passend bewijs met verband."
+    },
+    {
+      "id": 29,
+      "section": "E",
+      "section_title": "Verbanden en inzicht",
+      "type": "synthesis",
+      "points": 6,
+      "question": "Leg in een samenhangend antwoord uit hoe de drie fundamenten, de definitie van Islām en de twee pijlers van Lā ilāha illa Allāh met elkaar verbonden zijn.",
+      "model_answer": "De drie fundamenten beantwoorden wie wij aanbidden, via welke religie wij Hem aanbidden en welke Boodschapper die wetgeving heeft overgebracht. Kennis van de Heer leert dat Allāh de Rabb en enige Aanbedene is. De Islām is overgave aan Allāh door Tawḥīd, gehoorzaamheid en vrijmaking van Shirk. Dit komt samen in Lā ilāha illa Allāh: nafī verwerpt alles wat naast Allāh wordt aanbeden en ithbāt bevestigt alle ʿibādah voor Allāh alleen. De navolging van Muḥammad ṣallā Allāhu ʿalayhi wa-sallam bepaalt hoe die overgave en aanbidding plaatsvindt.",
+      "grading": "1 punt per fundament; 1 punt definitie Islām; 1 punt nafī/ithbāt; 1 punt samenhangende koppeling aan de Boodschapper."
+    },
+    {
+      "id": 30,
+      "section": "E",
+      "section_title": "Verbanden en inzicht",
+      "type": "synthesis",
+      "points": 6,
+      "question": "Leg de gelijkenis uit van de regen en de drie soorten grond uit de ḥadīth van Abū Mūsā. Welke grond staat voor het ontbreken van al-qabūl, en waarom?",
+      "model_answer": "De leiding en kennis lijken op regen. (1) Goede grond neemt water op en brengt veel groei voort: iemand begrijpt, leert en handelt. (2) Stevige grond bewaart water zodat anderen ervan profiteren: iemand bewaart en draagt kennis over. (3) Vlakke, onvruchtbare grond houdt geen water vast en brengt niets voort: iemand heft zijn hoofd niet op en accepteert de leiding niet. De derde grond verbeeldt dus het ontbreken van al-qabūl, omdat de boodschap wordt afgewezen en geen vrucht voortbrengt.",
+      "grading": "1 punt per grond; 1 punt juiste koppeling qabūl; 2 punten heldere uitleg van afwijzing en gebrek aan vrucht."
+    }
+  ]
+}
